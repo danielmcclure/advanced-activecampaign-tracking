@@ -20,13 +20,13 @@ Your account ID can be found within the official ActiveCampaign Tracking Code. H
 ## Changelog 
 
 ### 1.0.0 
-* Initial conversion to WordPress plugin by @DanielMcClure | [TheModernEntrepreneur.com](https://themodernentrepreneur.com/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
+* Initial conversion to WordPress plugin by [@DanielMcClure](https://profiles.wordpress.org/danielmcclure) | [TheModernEntrepreneur.com](https://themodernentrepreneur.com/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
 
 ### 0.1.0 
-* Custom tracking code forked from [OnlineMastery.co.uk](https://onlinemastery.co.uk/setup-active-campaign-site-tracking-wordpress/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
+* Custom tracking code forked from [@stevewoody82](https://profiles.wordpress.org/stevewoody82) | [OnlineMastery.co.uk](https://onlinemastery.co.uk/setup-active-campaign-site-tracking-wordpress/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
 
 ## WordPress Meta
-Contributors: @danielmcclure, @stevewoody82  
+Contributors: danielmcclure, stevewoody82  
 Donate link: https://www.paypal.me/modernentrepreneur  
 Tags: ActiveCampaign, Tracking, Analytics, Marketing Automation  
 Requires at least: 3.0.1  
