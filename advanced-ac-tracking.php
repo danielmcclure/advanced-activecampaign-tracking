@@ -4,7 +4,7 @@
  * Plugin Name:       Advanced ActiveCampaign Site Tracking
  * Plugin URI:        https://github.com/danielmcclure/advanced-ac-tracking
  * Description:       Adds ActiveCampaign site tracking code and links to users email if logged in. 
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            danielmcclure
  * Author URI:        https://danielmcclure.com/
  * License:           GPL-2.0+
@@ -124,21 +124,35 @@ function advanced_ac_tracking_inject() {
 		$user_email = $user_info->user_email;
 		
 		?>
-		<script type="text/javascript">
-			var trackcmp_email = '<?php echo $user_email; ?>';
-			var ac_id = '<?php echo $ac_id; ?>';
-			var trackcmp = document.createElement("script");
-			trackcmp.async = true;
-			trackcmp.type = 'text/javascript';
-			trackcmp.src = '//trackcmp.net/visit?actid='+encodeURIComponent(ac_id)+'&e='+encodeURIComponent(trackcmp_email)+'&r='+encodeURIComponent(document.referrer)+'&u='+encodeURIComponent(window.location.href);
-			var trackcmp_s = document.getElementsByTagName("script");
-			if (trackcmp_s.length) {
-				trackcmp_s[0].parentNode.appendChild(trackcmp);
-			} else {
-				var trackcmp_h = document.getElementsByTagName("head");
-				trackcmp_h.length && trackcmp_h[0].appendChild(trackcmp);
-			}
-		</script>
+        <script type="text/javascript">
+        var trackByDefault = true;
+
+        function acEnableTracking() {
+            var expiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30);
+            document.cookie = "ac_enable_tracking=1; expires= " + expiration + "; path=/";
+            acTrackVisit();
+        }
+
+        function acTrackVisit() {
+            var trackcmp_email = '<?php echo $user_email; ?>';
+            var ac_id = '<?php echo $ac_id; ?>';
+            var trackcmp = document.createElement("script");
+            trackcmp.async = true;
+            trackcmp.type = 'text/javascript';
+            trackcmp.src = '//trackcmp.net/visit?actid='+encodeURIComponent(ac_id)+'&e='+encodeURIComponent(trackcmp_email)+'&r='+encodeURIComponent(document.referrer)+'&u='+encodeURIComponent(window.location.href);
+            var trackcmp_s = document.getElementsByTagName("script");
+            if (trackcmp_s.length) {
+                trackcmp_s[0].parentNode.appendChild(trackcmp);
+            } else {
+                var trackcmp_h = document.getElementsByTagName("head");
+                trackcmp_h.length && trackcmp_h[0].appendChild(trackcmp);
+            }
+        }
+
+        if (trackByDefault || /(^|; )ac_enable_tracking=([^;]+)/.test(document.cookie)) {
+            acEnableTracking();
+        }
+        </script>
 		<?php		
     } else {
     	$ac_id = '';

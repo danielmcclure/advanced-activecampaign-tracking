@@ -19,6 +19,9 @@ Your account ID can be found within the official ActiveCampaign Tracking Code. H
 
 ## Changelog 
 
+### 1.1.0 
+* Updated ActiveCampaign Tracking Script
+
 ### 1.0.0 
 * Initial conversion to WordPress plugin by [@DanielMcClure](https://profiles.wordpress.org/danielmcclure) | [TheModernEntrepreneur.com](https://themodernentrepreneur.com/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
 

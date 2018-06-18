@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/modernentrepreneur
 Tags: ActiveCampaign, Tracking, Analytics, Marketing Automation
 Requires at least: 3.0.1
 Tested up to: 4.8
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ This plugin adds an enhanced version of the official ActiveCampaign Site Trackin
 Your account ID can be found within the official ActiveCampaign Tracking Code. Head to your ActiveCampaign profile’s **Settings > Tracking > Tracking Code** section and look for the numbers that come between **actid=** and the following **&**.
 
 == Changelog ==
+
+= 1.1.0 =
+* Updated ActiveCampaign Tracking Script
 
 = 1.0.0 =
 * Initial conversion to WordPress plugin by @DanielMcClure | [TheModernEntrepreneur.com](https://themodernentrepreneur.com/?utm_source=wordpress&utm_medium=plugin&utm_campaign=advanced_ac_tracking&utm_term=readme)
