@@ -14,7 +14,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 class AdvancedACSettings {
@@ -74,12 +74,20 @@ class AdvancedACSettings {
         );  
 
         add_settings_field(
-            'activecampaign_activecampaign_id_number', // ID
+            'activecampaign_id_number', // ID
             'ActiveCampaign Account ID', // Title 
             array( $this, 'activecampaign_id_number_callback' ), // Callback
             'advanced-ac-settings-admin', // Page
             'activecampaign_account_details' // Section           
-        );      
+        ); 
+
+        add_settings_field(   
+            'activecampaign_optin_req',  // ID                       
+            'Require opt-in for tracking?', // Title                 
+            array( $this, 'activecampaign_optin_req_callback' ), // Callback   
+            'advanced-ac-settings-admin', // Page
+            'activecampaign_account_details' // Section  
+        );       
     }
 
     /**
@@ -91,6 +99,8 @@ class AdvancedACSettings {
         $new_input = array();
         if( isset( $input['activecampaign_id_number'] ) )
             $new_input['activecampaign_id_number'] = absint( $input['activecampaign_id_number'] );
+        if( isset( $input['activecampaign_optin_req'] ) )
+            $new_input['activecampaign_optin_req'] = absint( $input['activecampaign_optin_req'] );
 
         return $new_input;
     }
@@ -108,6 +118,13 @@ class AdvancedACSettings {
         );
     }
 
+    // Get the settings option array and print one of its values
+    public function activecampaign_optin_req_callback() {
+        printf(
+            '<input type="checkbox" id="activecampaign_optin_req" name="activecampaign_account[activecampaign_optin_req]" value="1" ' . checked( 1, isset( $this->options['activecampaign_optin_req'] ) ? esc_attr( $this->options['activecampaign_optin_req']) :  0, false ) . '/>'
+        );
+    }
+
 }
 
 // Generate Settings in Admin View
@@ -116,16 +133,22 @@ if( is_admin() )
     
 // Insert Advanced Active Campaign Tracking into Wordpress with Email from logged in users.
 function advanced_ac_tracking_inject() {
-	$advanced_ac_options = get_option( 'activecampaign_account' );
-	
-	if ( isset( $advanced_ac_options['activecampaign_id_number'] ) ) {
+    $advanced_ac_options = get_option( 'activecampaign_account' );
+    
+    if ( isset( $advanced_ac_options['activecampaign_id_number'] ) ) {
         $ac_id = $advanced_ac_options['activecampaign_id_number'];
         $user_info = get_userdata( get_current_user_id() );
-		$user_email = $user_info->user_email;
-		
-		?>
+        $user_email = $user_info->user_email;
+
+        if( isset( $advanced_ac_options['activecampaign_optin_req'] ) && $advanced_ac_options[ 'activecampaign_optin_req' ] ) {
+            $activecampaign_optin_req = 'var trackByDefault = false;';
+        } else {
+            $activecampaign_optin_req = 'var trackByDefault = true;';
+        }
+        
+        ?>
         <script type="text/javascript">
-        var trackByDefault = true;
+        <?php echo $activecampaign_optin_req; ?>
 
         function acEnableTracking() {
             var expiration = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 30);
@@ -153,10 +176,10 @@ function advanced_ac_tracking_inject() {
             acEnableTracking();
         }
         </script>
-		<?php		
+        <?php       
     } else {
-    	$ac_id = '';
-    	echo '<!-- Please add your ActiveCampaign Account ID to enable Site Tracking -->';
+        $ac_id = '';
+        echo '<!-- Please add your ActiveCampaign Account ID to enable Site Tracking -->';
     }
 
 }
