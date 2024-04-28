@@ -1,5 +1,7 @@
 # Advanced ActiveCampaign Site Tracking
 
+> Note: This plugin is no longer actively maintained. 
+
 This is a WordPress plugin that adds an enhanced version of the official ActiveCampaign Site Tracking code that automatically passes through users emails whilst they are logged in. Once logged out a site user’s activity can still be tracked via cookies when interacting with ActiveCampaign forms or tagged email.
 
 > This plugin is developed for use with an [ActiveCampaign](https://themodernentrepreneur.com/link/activecampaign) account.
